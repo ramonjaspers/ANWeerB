@@ -12,6 +12,8 @@ import { useCurrentLocation } from '../../hooks/useCurrentLocation';
 import { LoadingIndicator } from '../../components/LoadingIndicator/LoadingIndicator';
 import { styles } from './index.style';
 import { theme } from '../../styles/theme';
+import { WeatherCard } from '../../components/WeatherCard/WeatherCard';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function MyWeatherTab() {
   const [refreshing, setRefreshing] = useState(false);
@@ -28,6 +30,7 @@ export default function MyWeatherTab() {
     isLoading: isLoadingWeather,
     error: weatherError,
     refetch: refetchWeather,
+    //TODO: replace hardcoded coordinates
   } = useWeatherData({ lat: 34.0901, lon: -118.4065 });
 
   const onRefresh = useCallback(async () => {
@@ -52,28 +55,46 @@ export default function MyWeatherTab() {
     if (showLoading) {
       return <LoadingIndicator />;
     }
-    //! location always fails on emulator
-    if (locationError && !weatherData) {
+
+    if (showLoading) {
+      const isPermissionError =
+        locationError?.message === 'Location permission denied';
       return (
-        <View>
-          <Text>Location Error</Text>
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorTitle}>📍 Location Required</Text>
+          <Text style={styles.errorText}>
+            {isPermissionError
+              ? 'Location permission is requiared to show weather for your current location. Please enable it in the system settings.'
+              : // This scenario happens on emulators
+                "Error \nFailed to get your current location.\n\nMake sure: \n- GPS is enabled\n- You are connected to the internet\n- You don't use an emulator ;)"}
+          </Text>
+          {isPermissionError && (
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => Linking.openSettings()}
+            >
+              <Text style={styles.buttonText}>Open Settings</Text>
+            </TouchableOpacity>
+          )}
         </View>
       );
     }
 
-    if (weatherError && !weatherData) {
+    if (weatherError) {
       return (
-        <View>
-          <Text>Weather Error</Text>
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorTitle}>⚠️ Error</Text>
+          <Text style={styles.errorText}>Failed to load weather data.</Text>
         </View>
       );
     }
+
     if (weatherData) {
       return (
-        <View>
-          <Text>{displayLocationName}</Text>
-          <Text>{weatherData.current.temp}</Text>
-        </View>
+        <WeatherCard
+          weather={weatherData.current}
+          locationName={displayLocationName}
+        />
       );
     }
 
@@ -81,19 +102,31 @@ export default function MyWeatherTab() {
   };
 
   return (
-    <ScrollView
-      style={styles.scrollView}
-      contentContainerStyle={styles.scrollContent}
-      refreshControl={
-        <RefreshControl
-          refreshing={refreshing}
-          onRefresh={onRefresh}
-          tintColor={theme.colors.white}
-          colors={[theme.colors.white]}
-        />
-      }
+    <LinearGradient
+      colors={[
+        theme.colors.secondary,
+        theme.colors.primary,
+        theme.colors.tertiary,
+      ]}
+      locations={[0.3, 0.7, 0.7]}
+      start={{ x: 0, y: 1 }}
+      end={{ x: 1, y: 0 }}
+      style={styles.container}
     >
-      {renderContent()}
-    </ScrollView>
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollContent}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor={theme.colors.white}
+            colors={[theme.colors.white]}
+          />
+        }
+      >
+        {renderContent()}
+      </ScrollView>
+    </LinearGradient>
   );
 }

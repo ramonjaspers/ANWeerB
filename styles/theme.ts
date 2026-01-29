@@ -11,7 +11,7 @@ export const theme = {
       dark: '#424242',
     },
     red: '#c70101ff',
-    transparentBackground: 'rgba(255, 255, 255, 0.2)',
+    transparentBackground: 'rgba(255, 255, 255, 0.3)',
   },
   spacing: {
     xs: 4,

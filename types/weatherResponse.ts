@@ -53,7 +53,7 @@ export interface WeatherSys {
  * Interface representing the "current" block mapped to match One Call API style
  * (the only data we really need)
  */
-export interface ProcessedWeatherData {
+export interface CurrenWeather {
   dt: number;
   temp: number;
   feels_like: number;
@@ -85,5 +85,5 @@ export interface WeatherApiResponse {
 }
 
 export interface ProcessedWeatherResponse extends WeatherApiResponse {
-  current: ProcessedWeatherData;
+  current: CurrenWeather;
 }
