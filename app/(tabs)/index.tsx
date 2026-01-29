@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useWeatherData } from './hooks/useWeatherData';
+import { useWeatherData } from '../../hooks/useWeatherData';
 
 const queryClient = new QueryClient();
 
