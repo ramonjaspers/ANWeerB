@@ -1,50 +1,99 @@
-import { useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import React, { useState, useCallback } from 'react';
+import {
+  View,
+  Text,
+  ScrollView,
+  Linking,
+  TouchableOpacity,
+  RefreshControl,
+} from 'react-native';
 import { useWeatherData } from '../../hooks/useWeatherData';
+import { useCurrentLocation } from '../../hooks/useCurrentLocation';
+import { LoadingIndicator } from '../../components/LoadingIndicator/LoadingIndicator';
+import { styles } from './index.style';
+import { theme } from '../../styles/theme';
 
-const queryClient = new QueryClient();
+export default function MyWeatherTab() {
+  const [refreshing, setRefreshing] = useState(false);
 
-function WeatherDisplay() {
-  const { data, isLoading, error, isError } = useWeatherData({
-    lat: 52.3676,
-    lon: 4.9041,
-  });
+  const {
+    data: coordinates,
+    isLoading: isLoadingLocation,
+    error: locationError,
+    refetch: refetchLocation,
+  } = useCurrentLocation();
 
-  useEffect(() => {
-    console.log('Query Status:', {
-      isLoading,
-      isError,
-      error: error?.message,
-      hasData: !!data,
-    });
-    if (data) {
-      console.log(JSON.stringify(data, null, 2));
+  const {
+    data: weatherData,
+    isLoading: isLoadingWeather,
+    error: weatherError,
+    refetch: refetchWeather,
+  } = useWeatherData({ lat: 34.0901, lon: -118.4065 });
+
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    try {
+      await refetchLocation();
+      await Promise.all([refetchWeather()]);
+    } finally {
+      setRefreshing(false);
     }
-  }, [data, isLoading, isError, error]);
+  }, [refetchLocation, refetchWeather]);
+
+  const displayLocationName = weatherData?.sys.country
+    ? `${weatherData?.sys.country}, ${weatherData?.name}`
+    : 'Current Location';
+
+  //! Watch out if using an emulator,
+  //! isLoadingLocation will fail with an error since it cant locate the device
+  const showLoading = (isLoadingLocation || isLoadingWeather) && !refreshing;
+
+  const renderContent = () => {
+    if (showLoading) {
+      return <LoadingIndicator />;
+    }
+    //! location always fails on emulator
+    if (locationError && !weatherData) {
+      return (
+        <View>
+          <Text>Location Error</Text>
+        </View>
+      );
+    }
+
+    if (weatherError && !weatherData) {
+      return (
+        <View>
+          <Text>Weather Error</Text>
+        </View>
+      );
+    }
+    if (weatherData) {
+      return (
+        <View>
+          <Text>{displayLocationName}</Text>
+          <Text>{weatherData.current.temp}</Text>
+        </View>
+      );
+    }
+
+    return null;
+  };
 
   return (
-    <View style={styles.container}>
-      <View>
-        {data ? <Text>we got data wohoo</Text> : <Text>nothing here?</Text>}
-      </View>
-    </View>
+    <ScrollView
+      style={styles.scrollView}
+      contentContainerStyle={styles.scrollContent}
+      refreshControl={
+        <RefreshControl
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+          tintColor={theme.colors.white}
+          colors={[theme.colors.white]}
+        />
+      }
+    >
+      {renderContent()}
+    </ScrollView>
   );
 }
-
-export default function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <WeatherDisplay />
-    </QueryClientProvider>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

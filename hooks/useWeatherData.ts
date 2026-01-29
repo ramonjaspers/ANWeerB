@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchWeatherData } from '../services/weatherApi';
+import type { Coordinates } from '../types/coordinates';
 
-export const useWeatherData = (coords: {lat: number, lon: number} | null) => {
+export const useWeatherData = (coords: Coordinates | null) => {
   return useQuery({
     queryKey: ['weather', coords],
     queryFn: () => {

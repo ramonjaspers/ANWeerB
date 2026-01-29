@@ -14,6 +14,9 @@
     },
     "ios": {
       "supportsTablet": true,
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "This app needs access to your location to show weather information for your current location."
+      },
       "bundleIdentifier": "com.ramonjaspers.ANWeerB"
     },
     "android": {
@@ -21,17 +24,15 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION"
+      ],
       "package": "com.ramonjaspers.ANWeerB"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-router",
-      [
-        "expo-screen-orientation",
+      ["expo-screen-orientation",
         {
           "orientationLock": "ALL"
         }

@@ -11,6 +11,7 @@
   "dependencies": {
     "@tanstack/react-query": "^5.90.20",
     "expo": "~54.0.32",
+    "expo-location": "^19.0.8",
     "expo-router": "^6.0.22",
     "expo-screen-orientation": "~9.0.8",
     "react": "19.1.0",
