@@ -4,25 +4,30 @@
     "slug": "ANWeerB",
     "version": "1.0.0",
     "orientation": "default",
-    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "scheme": "anweerb",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#ffcd00"
     },
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "This app needs access to your location to show weather information for your current location."
       },
-      "bundleIdentifier": "com.ramonjaspers.ANWeerB"
+      "bundleIdentifier": "com.ramonjaspers.ANWeerB",
+      "icon": {
+        "dark":"./assets/icon.png",
+        "light": "./assets/icon.png",
+        "tinted": "./assets/icon.png"  
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/adaptive-icon/foreground.png",
+        "backgroundImage": "./assets/adaptive-icon/background.png"
       },
       "permissions": [
         "ACCESS_COARSE_LOCATION",
