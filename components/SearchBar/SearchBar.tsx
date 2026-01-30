@@ -15,7 +15,6 @@ import { styles } from './SearchBar.styles';
 interface SearchBarProps {
   onLocationSelect: (location: LocationApiResponse) => void;
 }
-
 export const SearchBar: React.FC<SearchBarProps> = ({ onLocationSelect }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showResults, setShowResults] = useState(false);
@@ -46,6 +45,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onLocationSelect }) => {
           placeholder='Search for a location...'
           placeholderTextColor={theme.colors.grey.light}
           value={searchQuery}
+          autoCorrect={false}// autoCorrect hijacks the input focus
           onChangeText={(text) => {
             setSearchQuery(text);
             setShowResults(text.length >= 2);
@@ -105,7 +105,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onLocationSelect }) => {
         </View>
       )}
 
-      {showSearchResults && isLoading && (
+      {isLoading && (
         <View style={styles.resultsContainer}>
           <Text style={styles.loadingText}>Searching...</Text>
         </View>
