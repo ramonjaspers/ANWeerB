@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchLocationsByName } from '../services/geoApi';
 
 export const useLocationSearch = (query: string) => {
-  console.log('query', query);
   return useQuery({
     queryKey: ['location-search', query],
     queryFn: () => fetchLocationsByName(query),

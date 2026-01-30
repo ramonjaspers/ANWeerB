@@ -10,11 +10,8 @@ export const fetchWeatherData = async (
   const { lat, lon } = coords;
   const url = `${process.env.EXPO_PUBLIC_BASE_URL}?lat=${lat}&lon=${lon}&appid=${process.env.EXPO_PUBLIC_API_KEY}&units=metric`;
 
-  console.log('URL:', url);
-
   try {
     const response = await fetch(url);
-    console.log('Fetch response status:', response.status);
 
     if (!response.ok) {
       const errorText = await response.text();
