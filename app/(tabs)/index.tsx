@@ -30,8 +30,7 @@ export default function MyWeatherTab() {
     isLoading: isLoadingWeather,
     error: weatherError,
     refetch: refetchWeather,
-    //TODO: replace hardcoded coordinates
-  } = useWeatherData({ lat: 34.0901, lon: -118.4065 });
+  } = useWeatherData(coordinates ?? null);
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
@@ -56,7 +55,7 @@ export default function MyWeatherTab() {
       return <LoadingIndicator />;
     }
 
-    if (showLoading) {
+    if (locationError) {
       const isPermissionError =
         locationError?.message === 'Location permission denied';
       return (
@@ -83,7 +82,7 @@ export default function MyWeatherTab() {
     if (weatherError) {
       return (
         <View style={styles.textContainer}>
-          <Text style={styles.title}>⚠️ Error</Text>
+          <Text style={styles.title}>⚠️ Something went wrong</Text>
           <Text style={styles.errorText}>Failed to load weather data.</Text>
         </View>
       );

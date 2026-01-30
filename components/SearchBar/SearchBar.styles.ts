@@ -1,0 +1,97 @@
+import { StyleSheet } from 'react-native';
+import { theme } from '../../styles/theme';
+
+export const styles = StyleSheet.create({
+  container: {
+    padding: theme.spacing.sm,
+    zIndex: 10,
+    elevation: 10,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 38, 255, 0.19)',
+    borderRadius: theme.borderRadius.lg,
+    paddingHorizontal: theme.spacing.md,
+    paddingVertical: theme.spacing.xs,
+    borderWidth: 1,
+    borderColor: theme.colors.transparentBackground,
+    marginHorizontal: theme.spacing.xs,
+  },
+  searchIcon: {
+    fontSize: theme.fontSize.lg,
+    marginRight: theme.spacing.sm,
+    opacity: 0.8,
+  },
+  input: {
+    flex: 1,
+    fontSize: theme.fontSize.md,
+    color: theme.colors.white,
+  },
+  resultsContainer: {
+    position: 'absolute',
+    top: '100%',
+    left: theme.spacing.md,
+    right: theme.spacing.md,
+    marginTop: theme.spacing.md,
+    backgroundColor: theme.colors.white,
+    borderRadius: theme.borderRadius.lg,
+    borderWidth: 1,
+    borderColor: theme.colors.grey.light,
+    overflow: 'hidden',
+    elevation: 20,
+    shadowColor: theme.colors.black,
+    shadowRadius: 5,
+    shadowOpacity: 0.1,
+    zIndex: 20,
+  },
+  resultItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: theme.spacing.md,
+    paddingVertical: theme.spacing.sm,
+    borderTopWidth: 1,
+    borderTopColor: theme.colors.grey.medium,
+  },
+  resultText: {
+    flex: 1,
+    fontSize: theme.fontSize.md,
+    color: theme.colors.black,
+  },
+  historyHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: theme.spacing.md,
+    paddingVertical: theme.spacing.xs,
+    backgroundColor: theme.colors.grey.light,
+    borderBottomWidth: 1,
+    borderBottomColor: theme.colors.grey.medium,
+  },
+  historyTitle: {
+    fontSize: theme.fontSize.xs,
+    fontWeight: 'bold',
+    color: theme.colors.grey.dark,
+  },
+  clearButton: {
+    fontSize: theme.fontSize.xs,
+    fontWeight: 'bold',
+    color: theme.colors.secondary,
+  },
+  historyIcon: {
+    fontSize: theme.fontSize.sm,
+    marginRight: theme.spacing.sm,
+    opacity: 0.6,
+  },
+  locationIcon: {
+    fontSize: theme.fontSize.sm,
+    marginRight: theme.spacing.sm,
+  },
+  loadingText: {
+    paddingHorizontal: theme.spacing.md,
+    paddingVertical: theme.spacing.sm,
+    fontSize: theme.fontSize.sm,
+    color: theme.colors.grey.medium,
+    textAlign: 'center',
+  },
+});
