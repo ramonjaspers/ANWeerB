@@ -10,7 +10,7 @@ import {
 import { useWeatherData } from '../../hooks/useWeatherData';
 import { useCurrentLocation } from '../../hooks/useCurrentLocation';
 import { LoadingIndicator } from '../../components/LoadingIndicator/LoadingIndicator';
-import { styles } from './index.style';
+import { styles } from './base.style';
 import { theme } from '../../styles/theme';
 import { WeatherCard } from '../../components/WeatherCard/WeatherCard';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -60,8 +60,8 @@ export default function MyWeatherTab() {
       const isPermissionError =
         locationError?.message === 'Location permission denied';
       return (
-        <View style={styles.errorContainer}>
-          <Text style={styles.errorTitle}>📍 Location Required</Text>
+        <View style={styles.textContainer}>
+          <Text style={styles.title}>📍 Location Required</Text>
           <Text style={styles.errorText}>
             {isPermissionError
               ? 'Location permission is requiared to show weather for your current location. Please enable it in the system settings.'
@@ -73,7 +73,7 @@ export default function MyWeatherTab() {
               style={styles.button}
               onPress={() => Linking.openSettings()}
             >
-              <Text style={styles.buttonText}>Open Settings</Text>
+              <Text style={styles.text}>Open Settings</Text>
             </TouchableOpacity>
           )}
         </View>
@@ -82,8 +82,8 @@ export default function MyWeatherTab() {
 
     if (weatherError) {
       return (
-        <View style={styles.errorContainer}>
-          <Text style={styles.errorTitle}>⚠️ Error</Text>
+        <View style={styles.textContainer}>
+          <Text style={styles.title}>⚠️ Error</Text>
           <Text style={styles.errorText}>Failed to load weather data.</Text>
         </View>
       );
@@ -120,8 +120,8 @@ export default function MyWeatherTab() {
           <RefreshControl
             refreshing={refreshing}
             onRefresh={onRefresh}
-            tintColor={theme.colors.white}
-            colors={[theme.colors.white]}
+            tintColor={theme.colors.tertiary}
+            colors={[theme.colors.tertiary]}
           />
         }
       >

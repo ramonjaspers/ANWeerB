@@ -17,14 +17,14 @@ export const styles = StyleSheet.create({
   },
 
   // content specific style
-  errorContainer: {
+  textContainer: {
     alignSelf: 'center',
     backgroundColor: theme.colors.transparentBackground,
     borderRadius: theme.borderRadius.lg,
     maxWidth: '90%',
     padding: theme.spacing.xl,
   },
-  errorTitle: {
+  title: {
     fontSize: theme.fontSize.xxl,
     fontWeight: 'bold',
     color: theme.colors.grey.light,
@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
     paddingVertical: theme.spacing.md,
     borderRadius: theme.borderRadius.md,
   },
-  buttonText: {
+  text: {
     color: theme.colors.white,
     fontSize: theme.fontSize.md,
     fontWeight: '600',
