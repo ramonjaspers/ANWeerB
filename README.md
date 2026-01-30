@@ -35,20 +35,18 @@ Spent ~8hrs
 - **OpenWeatherMap API** for weather data and docs
 - **[CSS Gradient](https://cssgradient.io/)** for gradients
 - **ANWB website** for inspiration and colors
-- **Claude sonnet 4.5** used for style generation (layout: header and tab bar)
+- **Claude sonnet 4.5** used for style assistance (layout: header, tab bar and searchbar)
 
 ## Things to improve
-
 - Add unit tests
 - Implement nice svg's or animations for weather icons
 - Improve styling, less static
 - Improve device compatibility the header being a bit too big on some devices
 - Implement RN accessibility features
 
-## Issues i ran into
-
+## Issues I ran into
+- Incorrect API used from the start; API 3.0 instead of 2.5
 - iOS forces https
 - iOS touchability issues with scrollview and buttons overlapping (absolute positioning)
-  ...
 
 signing off! Hope you enjoy this little app :)

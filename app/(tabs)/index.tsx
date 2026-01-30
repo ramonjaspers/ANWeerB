@@ -63,7 +63,7 @@ export default function MyWeatherTab() {
           <Text style={styles.title}>📍 Location Required</Text>
           <Text style={styles.errorText}>
             {isPermissionError
-              ? 'Location permission is requiared to show weather for your current location. Please enable it in the system settings.'
+              ? 'Location permission is required to show the weather for your location.\n Please enable it in the system settings.'
               : // This scenario happens on emulators
                 "Error \nFailed to get your current location.\n\nMake sure: \n- GPS is enabled\n- You are connected to the internet\n- You don't use an emulator ;)"}
           </Text>
