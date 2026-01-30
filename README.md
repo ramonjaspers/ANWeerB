@@ -2,7 +2,14 @@
 
 ANWB assignment ReactNative weather app
 
-TASKS
+## Setup
+
+- Clone the repo
+- Copy the .env.example to .env and fill in your API key
+- Run `pnpm install`
+- Run `pnpm android` or `pnpm ios`
+
+## TASKS
 
 - [x]Geef weerinformatie op dmv https://openweathermap.org/api.
 - [x]Toon de huidige weersomstandigheden voor een specifieke locatie.
@@ -36,10 +43,12 @@ Spent ~8hrs
 - Implement nice svg's or animations for weather icons
 - Improve styling, less static
 - Improve device compatibility the header being a bit too big on some devices
+- Implement RN accessibility features
 
 ## Issues i ran into
 
 - iOS forces https
 - iOS touchability issues with scrollview and buttons overlapping (absolute positioning)
   ...
-  signing off! It's lunch o clock ;)
+
+signing off! Hope you enjoy this little app :)
